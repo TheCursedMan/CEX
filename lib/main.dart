@@ -5,10 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:starter_name/FoodMenu.dart';
-import 'package:starter_name/ฺBox.dart';
 import 'package:http/http.dart' as http;
+
+//other files
 import 'package:starter_name/cticonlink.dart';
+import 'package:starter_name/tokenselect.dart';
 
 
 void main() {
@@ -95,76 +96,81 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 });
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[700]!.withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(15),
-                                  // boxShadow: [
-                                  //   BoxShadow(
-                                  //       color: Colors.grey[700]!,
-                                  //       offset: const Offset(4, 4),
-                                  //       blurRadius: 5)
-                                  // ]
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.network(
-                                      currency_pic),
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '$symbol',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TokenSelect()));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[700]!.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(15),
+                                    // boxShadow: [
+                                    //   BoxShadow(
+                                    //       color: Colors.grey[700]!,
+                                    //       offset: const Offset(4, 4),
+                                    //       blurRadius: 5)
+                                    // ]
                                   ),
-                                  Text(
-                                    "${NumberFormat('#.#').format(percent_chg)}%",
-                                    style: TextStyle(
-                                        fontSize: 18, color: percent_color),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '\$ ${NumberFormat('#,###.##').format(price)}',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              Text(
-                                'Vol.'+"${NumberFormat('#,###.##').format(vol)}" + 'm',
-                                style:
-                                    TextStyle(fontSize: 15, color: Colors.grey.withOpacity(0.7)),
-                              )
-                            ],
-                          )
-                        ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.network(
+                                        currency_pic),
+                                  ),
+                                ),
+                                const SizedBox(width: 20),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '$symbol',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      "${NumberFormat('#.#').format(percent_chg)}%",
+                                      style: TextStyle(
+                                          fontSize: 18, color: percent_color),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '\$ ${NumberFormat('#,###.##').format(price)}',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  'Vol.'+"${NumberFormat('#,###.##').format(vol)}" + 'm',
+                                  style:
+                                      TextStyle(fontSize: 15, color: Colors.grey.withOpacity(0.7)),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }),
         ));
