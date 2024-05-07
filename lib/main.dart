@@ -82,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
               itemBuilder: (context, index) {
 
                 //variable
+                final data_item = data[index];
                 final symbol = data[index]['symbol'];
                 final price = double.parse(data[index]['lastPrice']);
                 final percent_chg = double.parse(data[index]['priceChangePercent']);
@@ -98,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 return GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TokenSelect()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TokenSelect(selecttoken: data_item , token_img: currency_pic,)));
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
