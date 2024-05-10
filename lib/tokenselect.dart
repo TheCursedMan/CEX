@@ -19,109 +19,122 @@ class _TokenSelectState extends State<TokenSelect> {
           children: [
             Padding(
               padding: const EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 children: [
-                 Row(
-                   children: [
-                     Container(
-                       height: 60,
-                       child: Image.network(widget.token_img),
-                     ),
-                     SizedBox(
-                         width: 10
-                     ),
-                     Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children: [
-                         Text(widget.selecttoken['symbol'],
-                           style: TextStyle(
-                               fontSize: 17,
-                               fontWeight: FontWeight.w500
-                           ),),
-                       ],
-                     ),
-                   ],
-                 ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  // Row(
+                  //   children: [
+                  //     IconButton(onPressed: (){
+                  //       Navigator.pop(context);
+                  //     }, icon: Icon(Icons.arrow_back))
+                  //   ],
+                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('\$ ${NumberFormat('#,###.##').format(double.parse(widget.selecttoken['lastPrice']))}',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.red
-                      ),),
-                      Text(widget.selecttoken['priceChangePercent'].toString() + '%',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: double.parse(widget.selecttoken['priceChangePercent']) > 0 ? Colors.green : Colors.red
-                        ),),
+                      Row(
+                        children: [
+                          Container(
+                            height: 60,
+                            child: Image.network(widget.token_img),
+                          ),
+                          SizedBox(
+                              width: 10
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(widget.selecttoken['symbol'],
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('\$ ${NumberFormat('#,###.##').format(double.parse(widget.selecttoken['lastPrice']))}',
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.red
+                            ),),
+                          Text(widget.selecttoken['priceChangePercent'].toString() + '%',
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: double.parse(widget.selecttoken['priceChangePercent']) > 0 ? Colors.green : Colors.red
+                            ),),
+                        ],
+                      ),
                     ],
                   ),
-                ],
+                ]
               ),
             ),
             Divider(),
             Padding(
               padding: const EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Text('High',
-                        style: TextStyle(
+              child: Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Text('High',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey
+                          ),),
+                        SizedBox(height: 10,),
+                        Text('\$ ${NumberFormat('#,###.##').format(double.parse(widget.selecttoken['highPrice']))}',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                          ),),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Column(
+                      children: [
+                        Text('Low',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey
+                          ),),
+                        SizedBox(height: 10,),
+                        Text('\$ ${NumberFormat('#,###.##').format(double.parse(widget.selecttoken['lowPrice']))}',
+                          style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w500,
-                            color: Colors.grey
-                        ),),
-                      SizedBox(height: 10,),
-                      Text('\$ ${NumberFormat('#,###.##').format(double.parse(widget.selecttoken['highPrice']))}',
-                        style: TextStyle(
+                          ),),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Column(
+                      children: [
+                        Text('Volume(asset)',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey
+                          ),),
+                        SizedBox(height: 10,),
+                        Text('${NumberFormat('#,###.##').format(double.parse(widget.selecttoken['volume']))}',
+                          style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w500,
-                        ),),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Column(
-                    children: [
-                      Text('Low',
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey
-                        ),),
-                      SizedBox(height: 10,),
-                      Text('\$ ${NumberFormat('#,###.##').format(double.parse(widget.selecttoken['lowPrice']))}',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                        ),),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Column(
-                    children: [
-                      Text('Volume(asset)',
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey
-                        ),),
-                      SizedBox(height: 10,),
-                      Text('${NumberFormat('#,###.##').format(double.parse(widget.selecttoken['volume']))}',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                        ),),
-                    ],
-                  )
-                ],
+                          ),),
+                      ],
+                    )
+                  ],
+                ),
               ),
             )
           ],

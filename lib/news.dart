@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-
 import 'package:flutter/material.dart';
+import 'package:starter_name/newsdetail.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({super.key});
@@ -16,7 +16,8 @@ class _NewsPageState extends State<NewsPage> {
   List<dynamic> news_data = [];
 
   void getNews() async {
-    final String apiUrl = "https://mboum-finance.p.rapidapi.com/v2/markets/news?tickers=AAPL&type=ALL";
+    final String apiUrl =
+        "https://mboum-finance.p.rapidapi.com/v2/markets/news?tickers=AAPL&type=ALL";
     final Map<String, String> headers = {
       "X-Rapidapi-Key": "8cd6b88910msh68f1bbe8e590734p14069djsndd7fc06a3bb5",
       "X-Rapidapi-Host": "mboum-finance.p.rapidapi.com",
@@ -42,13 +43,10 @@ class _NewsPageState extends State<NewsPage> {
     }
   }
 
-
-
-
   @override
-  void initState(){
-      super.initState();
-      getNews();
+  void initState() {
+    super.initState();
+    getNews();
   }
 
   @override
@@ -57,16 +55,13 @@ class _NewsPageState extends State<NewsPage> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: ListView.builder(
           itemCount: news_data.length,
-          itemBuilder: (context , index){
-
+          itemBuilder: (context, index) {
             final data_item = news_data[index];
             final news_title = data_item['title'];
             final news_content = data_item['text'];
@@ -74,29 +69,51 @@ class _NewsPageState extends State<NewsPage> {
             final news_time = data_item['time'];
             final news_ago = data_item['ago'];
 
-
             return GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Container()));
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NewsDetail(
+                            news_title: news_title,
+                            news_img: news_img,
+                            news_content: news_content)));
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Image.network(news_img , width: 150, height: 150,),
-                      SizedBox(width: 20,),
+                      Image.network(
+                        news_img,
+                        width: 150,
+                        height: 150,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${news_title}' , style: TextStyle(color: Colors.white) , maxLines: 2 , overflow: TextOverflow.ellipsis,),
-                            Text('${news_time}' , style: TextStyle(color: Colors.grey , fontSize: 12),),
-                            Text('${news_ago}' , style: TextStyle(color: Colors.grey),)
+                            Text(
+                              '${news_title}',
+                              style: TextStyle(color: Colors.white),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              '${news_time}',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 12),
+                            ),
+                            Text(
+                              '${news_ago}',
+                              style: TextStyle(color: Colors.grey),
+                            )
                           ],
                         ),
                       )
-
                     ],
                   )
                 ],
