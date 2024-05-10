@@ -36,6 +36,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late Timer timer; //create timer variable
   List<dynamic> data = [];
+
   @override
   void initState() {
     super.initState();
@@ -65,12 +66,38 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  int _currentindex = 0;
+
 //แสดงผลข้อมูล
   @override
   Widget build(BuildContext context) {
     print("Call Build");
     return Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentindex,
+          onTap: (int NewIndex){
+            setState(() {
+              _currentindex = NewIndex;
+              print(_currentindex);
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home'
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.currency_bitcoin),
+                label: 'Token'
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.newspaper),
+                label: 'News'
+            ),
 
+          ],
+
+        ),
         backgroundColor: const Color(343947),
         appBar: AppBar(
           title: Text("Crypto Market (Binance)"),
@@ -80,26 +107,32 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView.builder(
               itemCount: data.length,
               itemBuilder: (context, index) {
-
                 //variable
                 final data_item = data[index];
                 final symbol = data[index]['symbol'];
                 final price = double.parse(data[index]['lastPrice']);
-                final percent_chg = double.parse(data[index]['priceChangePercent']);
-                final vol = double.parse(data[index]['quoteVolume']) / 1000000;
-                Color percent_color = percent_chg > 0 ? Colors.green : percent_chg < 0 ? Colors.red: Colors.grey;
+                final percent_chg = double.parse(
+                    data[index]['priceChangePercent']);
+                final vol = double.parse(data[index]['quoteVolume']) /
+                    1000000;
+                Color percent_color = percent_chg > 0
+                    ? Colors.green
+                    : percent_chg < 0 ? Colors.red : Colors.grey;
 
                 //img
-                String currency_pic = '' ;
+                String currency_pic = '';
                 CryptoImgLink.links.forEach((key, value) {
-                  if(key == symbol){
+                  if (key == symbol) {
                     currency_pic = value.toString();
                   }
                 });
 
                 return GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TokenSelect(selecttoken: data_item , token_img: currency_pic,)));
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                            TokenSelect(selecttoken: data_item,
+                              token_img: currency_pic,)));
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   width: 60,
                                   height: 60,
                                   decoration: BoxDecoration(
-                                    color: Colors.grey[700]!.withOpacity(0.3),
+                                    color: Colors.grey[700]!.withOpacity(
+                                        0.3),
                                     borderRadius: BorderRadius.circular(15),
                                     // boxShadow: [
                                     //   BoxShadow(
@@ -132,7 +166,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 const SizedBox(width: 20),
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .start,
                                   children: [
                                     Text(
                                       '$symbol',
@@ -142,9 +177,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                           fontWeight: FontWeight.w500),
                                     ),
                                     Text(
-                                      "${NumberFormat('#.#').format(percent_chg)}%",
+                                      "${NumberFormat('#.#').format(
+                                          percent_chg)}%",
                                       style: TextStyle(
-                                          fontSize: 18, color: percent_color),
+                                          fontSize: 18,
+                                          color: percent_color),
                                     )
                                   ],
                                 ),
@@ -154,16 +191,19 @@ class _MyHomePageState extends State<MyHomePage> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '\$ ${NumberFormat('#,###.##').format(price)}',
+                                  '\$ ${NumberFormat('#,###.##').format(
+                                      price)}',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Text(
-                                  'Vol.'+"${NumberFormat('#,###.##').format(vol)}" + 'm',
+                                  'Vol.' + "${NumberFormat('#,###.##')
+                                      .format(vol)}" + 'm',
                                   style:
-                                      TextStyle(fontSize: 15, color: Colors.grey.withOpacity(0.7)),
+                                  TextStyle(fontSize: 15, color: Colors.grey
+                                      .withOpacity(0.7)),
                                 )
                               ],
                             )
