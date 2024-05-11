@@ -74,12 +74,33 @@ class _TokenListState extends State<TokenList> {
             }
           });
 
+          String graphid;
+          switch (data[index]['symbol']){
+            case 'BTCUSDT':
+              graphid = 'bitcoin';
+              break;
+            case 'ETHUSDT':
+              graphid = 'ethereum';
+              break;
+            case 'BNBUSDT':
+              graphid = 'binancecoin';
+              break;
+            case 'SOLUSDT':
+              graphid = 'solana';
+              break;
+            case 'DOTUSDT':
+              graphid = 'polkadot';
+              break;
+            default:
+              graphid = 'bitcoin';
+          }
+
           return GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(
                   builder: (context) =>
                       TokenSelect(selecttoken: data_item,
-                        token_img: currency_pic,)));
+                        token_img: currency_pic, graphid: graphid,)));
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
