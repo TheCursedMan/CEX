@@ -1,4 +1,4 @@
-# starter_name
+# Market Watcher application
 
 A new Flutter project.
 
